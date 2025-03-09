@@ -1,0 +1,14 @@
+:root {
+    --bg-color: #121212;
+    --nav-bg: rgba(0, 0, 0, 0.8);
+    --dot-color: yellow;
+    --dot-out-color: white;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg-color);
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
