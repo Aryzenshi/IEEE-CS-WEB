@@ -1,14 +1,227 @@
 :root {
-    --bg-color: #121212;
-    --nav-bg: rgba(0, 0, 0, 0.8);
-    --dot-color: yellow;
-    --dot-out-color: white;
+    --primary-color: black;
+    --secondary-color: white;
+    --highlight-color: yellow;
+    --transition-speed: 0.5s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-    margin: 0;
-    background-color: var(--bg-color);
-    color: white;
-    font-family: Arial, sans-serif;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     overflow-x: hidden;
+}
+
+nav {
+    cursor: default;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: transparent;
+    color: var(--primary-color);
+    padding: 15px;
+    text-align: center;
+    transition: transform var(--transition-speed);
+    z-index: 1000;
+    mix-blend-mode: difference;
+}
+
+nav a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+nav img {
+    width: 40px;
+    mix-blend-mode: difference;
+}
+
+.hide-nav {
+    transform: translateY(-100%);
+}
+
+.cursor-dot {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background-color: var(--highlight-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s, background-color 0.3s;
+    pointer-events: none;
+}
+
+.container {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+    height: 100vh;
+}
+
+.services {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    font-size: 2em;
+    transition: color var(--transition-speed);
+    position: relative;
+    width: 25%;
+    overflow: hidden;
+    background-color: var(--primary-color);
+    border-right: 1px solid var(--secondary-color);
+}
+
+.services::before,
+.services::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: var(--secondary-color);
+    transition: width 0.2s ease-out;
+    z-index: 1;
+}
+
+.services::before {
+    left: 50%;
+}
+
+.services::after {
+    right: 50%;
+}
+
+.services:hover::before {
+    width: 50%;
+}
+
+.services:hover::after {
+    width: 50%;
+}
+
+.service-logo {
+    position: relative;
+    color: var(--secondary-color);
+    z-index: 2;
+    transition: color var(--transition-speed);
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.service-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--secondary-color);
+    z-index: 2;
+    transition: opacity var(--transition-speed), transform var(--transition-speed), color var(--transition-speed);
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(20px);
+}
+.services:hover .service-footer {
+    opacity: 1;
+    transform: translateY(0);
+    color: var(--primary-color);
+}
+
+.arrow-container {
+    position: absolute;
+    right: 20px;
+    top: 47%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.arrow-icon {
+    width: 16px;
+    height: 16px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    position: absolute;
+}
+
+.arrow-visible {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.arrow-hidden {
+    transform: translate(-50%, 50%) rotateZ(-45deg);
+    opacity: 0;
+}
+
+.services:hover .arrow-visible {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.services:hover .arrow-hidden {
+    transform: translate(0%, 0%) rotateZ(-45deg);
+    opacity: 1;
+}
+
+.services:hover .service-logo,
+.services:hover .service-footer {
+    color: var(--primary-color);
+}
+
+.services video {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+    z-index: 0;
+}
+
+.services:hover video {
+    display: block;
+}
+
+
+@media (max-width: 768px) {
+    .services {
+        width: 100%;
+        height: 50vh;
+        font-size: 1.5em;
+        padding: 10px;
+        border-right: none;
+        border-bottom: 1px solid var(--secondary-color);
+    }
+
+    .service-logo {
+        font-size: 1.2em;
+    }
+
+    .service-footer {
+        font-size: 0.7em;
+    }
+
+    .services video {
+        width: 90%;
+        max-width: 250px;
+    }
 }
