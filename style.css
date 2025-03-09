@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
 :root {
     --primary-color: black;
     --secondary-color: white;
@@ -9,8 +10,59 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'PT Sans', sans-serif;
 }
+
+/* Hover Expand animation class */
+.hover-expand {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+.hover-expand::before,
+.hover-expand::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background-color: black;
+    transition: height 0.3s ease;
+    z-index: 0;
+}
+.hover-expand::before {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.hover-expand::after {
+    bottom: 50%;
+    transform: translateY(50%);
+}
+.hover-expand:hover::before,
+.hover-expand:hover::after {
+    height: 100%;
+}
+.hover-expand div {
+    position: relative;
+    z-index: 1;
+}
+/* For other buttons */
+.hover-expand.dark {
+    color: white;
+    background-color: black;
+    border: 2px solid black;
+}
+
+.hover-expand.dark::before,
+.hover-expand.dark::after {
+    background-color: white;
+}
+
+.hover-expand.dark:hover {
+    color: black;
+    border-color: black;
+}
+
 
 body {
     background-color: var(--primary-color);
@@ -23,24 +75,91 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
     background-color: transparent;
-    color: var(--primary-color);
     padding: 15px;
-    text-align: center;
-    transition: transform var(--transition-speed);
     z-index: 1000;
     mix-blend-mode: difference;
 }
 
-nav a {
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 20px 40px;
+    background-color: transparent;
+    z-index: 1000;
+}
+
+nav a {
     text-decoration: none;
 }
 
 nav img {
-    width: 40px;
+    width: 30px;
     mix-blend-mode: difference;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+/* "Get in touch" button */
+.menu__cta-contact {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    padding: 5px 15px;
+    font-size: 14px;
+    color: black;
+    background-color: #dbff00;
+    border: 2px solid #dbff00;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+.menu__cta-contact:hover {
+    color: white;
+    border-color: white;
+}
+
+/* Burger menu */
+.menu__burger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    mix-blend-mode: difference;
+    cursor: pointer;
+}
+
+.menu__burger__dots-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 20px;
+}
+
+.menu__burger__dot {
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.menu__burger-btn:hover .menu__burger__dot{
+    background-color: #dbff00;
 }
 
 .hide-nav {

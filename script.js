@@ -10,3 +10,15 @@ function invertNavbarColor() {
 
 window.onload = invertNavbarColor;
 window.addEventListener("scroll", invertNavbarColor);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const serviceSections = document.querySelectorAll('.services');
+    serviceSections.forEach((service) => {
+        service.addEventListener('click', (event) => {
+            if (event.target.closest('.arrow-container')) return;
+            const url = service.getAttribute('data-url');
+            window.location.href = url;
+        });
+    });
+});
